@@ -9,30 +9,22 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
-    <style>
-      .col {
-        width: 4vh;
-        height: 8vh;
-        border: 2px solid black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <div class="bg-primary vh-100">
+  <div class="container">
     <body>
-      <h1>Mars Rover Game</h1>
-      <h5>Hi from Mars Rover in javascript!</h5>
+      <div class="container text-center">
+        <h1 class="text-danger">Mars Rover Game</h1>
+        <h5 class="text-danger">Hi from Mars Rover in javascript!</h5>
 
-      <label for="rowsInput">Numbers of row:</label>
-      <input type="number" id="rowsInput" min="1" max="10" />
+        <label for="rowsInput" class="text-danger">Numbers of row:</label>
+        <input type="number" id="rowsInput" min="1" max="10" />
 
-      <label for="colsInput">Numbers of col:</label>
-      <input type="number" id="colsInput" min="1" max="10" />
+        <label for="colsInput" class="text-danger">Numbers of col:</label>
+        <input type="number" id="colsInput" min="1" max="10" />
 
-      <button onclick="createGrid()">Create grid container</button>
-
+        <button onclick="createGrid()">Create grid container</button>
+      </div>
       <div
         id="gridContainer"
         class="container mt-4 justify-content-center"

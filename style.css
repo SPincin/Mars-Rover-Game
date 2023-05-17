@@ -1,0 +1,20 @@
+.col {
+  width: 4vh;
+  height: 8vh;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("image/istockphoto-529932617-170667a.jpg");
+}
+.emoji {
+  font-size: 40px;
+}
+
+body {
+  background-image: url("image/mars.png");
+}
+
+/* #gridContainer {
+  background-color: darkorange;
+} */

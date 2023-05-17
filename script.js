@@ -1,8 +1,9 @@
 let gridCreated = document.getElementById("gridContainer");
 const roverEmoji = "\u{1F6F8}";
+roverEmoji.className = "rover-emoji";
+const rockEmoji = "\u{1F9F8}";
 let rowNumber;
 let columnNumber;
-let roverCoordinates;
 
 const randomStart = () => {
   const randomRow = getRandomNumber(rowNumber);
@@ -18,8 +19,41 @@ const placeRover = (coordinate) => {
   const position = document.getElementById(coordinate);
   position.innerText = roverEmoji;
 };
+
+// const placeObstacles = (coordinate) => {
+//   const position = document.getElementById(coordinate);
+//   position.innerText = rockEmoji;
+// };
+
+// const createObstacles = (numObstacles) => {
+//   removeObstacles();
+
+//   for (let i = 0; i < numObstacles; i++) {
+//     let obstacleCoordinate;
+
+//     do {
+//       const randomRow = getRandomNumber(rowNumber);
+//       const randomColumn = getRandomNumber(columnNumber);
+//       obstacleCoordinate = `${randomRow}-${randomColumn}`;
+//     } while (
+//       obstacleCoordinate === roverCoordinates ||
+//       obstacleCoordinates.includes(obstacleCoordinate)
+//     );
+
+//     obstacleCoordinates.push(obstacleCoordinate);
+//     placeObstacles(obstacleCoordinate);
+//   }
+// };
+
+const removeObstacles = () => {
+  for (const obstacleCoordinate of obstacleCoordinates) {
+    const obstaclePosition = document.getElementById(obstacleCoordinate);
+    obstaclePosition.innerText = "";
+  }
+  obstacleCoordinates.length = 0;
+};
+
 let createGrid = () => {
-  // gridCreated.style.display = "block";
   gridCreated.replaceChildren();
   rowNumber = parseInt(document.getElementById("rowsInput").value);
   columnNumber = parseInt(document.getElementById("colsInput").value);
@@ -42,60 +76,43 @@ let createGrid = () => {
   placeRover(roverCoordinates);
 };
 
+let roverCoordinates = randomStart();
 const moveRover = (direction) => {
   const parts = roverCoordinates.split("-");
-  if (direction === "ArrowRight") {
-    if (Number(parts[1]) === columnNumber) {
-      const newPosition = parts[0] + "-" + 1;
-      document.getElementById(roverCoordinates).innerText = "";
-      roverCoordinates = newPosition;
-      placeRover(roverCoordinates);
-    } else {
-      const newPosition =
-        String(Number(parts[0])) + "-" + String(Number(parts[1]) + 1);
-      document.getElementById(roverCoordinates).innerText = "";
-      roverCoordinates = newPosition;
-      placeRover(roverCoordinates);
-    }
-  } else if (direction === "ArrowLeft") {
-    if (Number(parts[1]) === 1) {
-      const newPosition = parts[0] + "-" + columnNumber;
-      document.getElementById(roverCoordinates).innerText = "";
-      roverCoordinates = newPosition;
-      placeRover(roverCoordinates);
-    } else {
-      const newPosition =
-        String(Number(parts[0])) + "-" + String(Number(parts[1]) - 1);
-      document.getElementById(roverCoordinates).innerText = "";
-      roverCoordinates = newPosition;
-      placeRover(roverCoordinates);
-    }
-  } else if (direction === "ArrowUp") {
-    if (Number(parts[0]) === 1) {
-      const newPosition = rowNumber + "-" + String(Number(parts[1]));
-      document.getElementById(roverCoordinates).innerText = "";
-      roverCoordinates = newPosition;
-      placeRover(roverCoordinates);
-    } else {
-      const newPosition =
-        String(Number(parts[0]) - 1) + "-" + String(Number(parts[1]));
-      document.getElementById(roverCoordinates).innerText = "";
-      roverCoordinates = newPosition;
-      placeRover(roverCoordinates);
-    }
-  } else if (direction === "ArrowDown") {
-    if (Number(parts[0]) === rowNumber) {
-      const newPosition = 1 + "-" + parts[1];
-      document.getElementById(roverCoordinates).innerText = "";
-      roverCoordinates = newPosition;
-      placeRover(roverCoordinates);
-    } else {
-      const newPosition = String(Number(parts[0]) + 1) + "-" + parts[1];
-      document.getElementById(roverCoordinates).innerText = "";
-      roverCoordinates = newPosition;
-      placeRover(roverCoordinates);
-    }
+  let newPosition;
+
+  switch (direction) {
+    case "ArrowRight":
+      newPosition =
+        parts[0] +
+        "-" +
+        (Number(parts[1]) === columnNumber ? 1 : Number(parts[1]) + 1);
+      break;
+    case "ArrowLeft":
+      newPosition =
+        parts[0] +
+        "-" +
+        (Number(parts[1]) === 1 ? columnNumber : Number(parts[1]) - 1);
+      break;
+    case "ArrowUp":
+      newPosition =
+        (Number(parts[0]) === 1 ? rowNumber : Number(parts[0]) - 1) +
+        "-" +
+        parts[1];
+      break;
+    case "ArrowDown":
+      newPosition =
+        (Number(parts[0]) === rowNumber ? 1 : Number(parts[0]) + 1) +
+        "-" +
+        parts[1];
+      break;
+    default:
+      return;
   }
+
+  document.getElementById(roverCoordinates).innerText = "";
+  roverCoordinates = newPosition;
+  placeRover(roverCoordinates);
 };
 
 document.addEventListener("keydown", (event) => moveRover(event.key));
