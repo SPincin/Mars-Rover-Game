@@ -45,13 +45,13 @@ const placeRover = (coordinate) => {
 //   }
 // };
 
-const removeObstacles = () => {
-  for (const obstacleCoordinate of obstacleCoordinates) {
-    const obstaclePosition = document.getElementById(obstacleCoordinate);
-    obstaclePosition.innerText = "";
-  }
-  obstacleCoordinates.length = 0;
-};
+// const removeObstacles = () => {
+//   for (const obstacleCoordinate of obstacleCoordinates) {
+//     const obstaclePosition = document.getElementById(obstacleCoordinate);
+//     obstaclePosition.innerText = "";
+//   }
+//   obstacleCoordinates.length = 0;
+// };
 
 let createGrid = () => {
   gridCreated.replaceChildren();
