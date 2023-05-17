@@ -46,38 +46,51 @@ const moveRover = (direction) => {
   const parts = roverCoordinates.split("-");
   if (direction === "ArrowRight") {
     if (Number(parts[1]) === columnNumber) {
-      console.log("sei al limite destro!");
+      const newPosition = parts[0] + "-" + 1;
+      document.getElementById(roverCoordinates).innerText = "";
+      roverCoordinates = newPosition;
+      placeRover(roverCoordinates);
     } else {
-      const newPosition = parts[0] + "-" + String(Number(parts[1]) + 1);
+      const newPosition =
+        String(Number(parts[0])) + "-" + String(Number(parts[1]) + 1);
       document.getElementById(roverCoordinates).innerText = "";
       roverCoordinates = newPosition;
       placeRover(roverCoordinates);
     }
   } else if (direction === "ArrowLeft") {
     if (Number(parts[1]) === 1) {
-      console.log("sei al limite sinistro!");
+      const newPosition = parts[0] + "-" + columnNumber;
+      document.getElementById(roverCoordinates).innerText = "";
+      roverCoordinates = newPosition;
+      placeRover(roverCoordinates);
     } else {
-      const newPosition = parts[0] + "-" + String(Number(parts[1]) - 1);
+      const newPosition =
+        String(Number(parts[0])) + "-" + String(Number(parts[1]) - 1);
       document.getElementById(roverCoordinates).innerText = "";
       roverCoordinates = newPosition;
       placeRover(roverCoordinates);
     }
   } else if (direction === "ArrowUp") {
     if (Number(parts[0]) === 1) {
-      console.log("sei al limite superiore!");
+      const newPosition = rowNumber + "-" + String(Number(parts[1]));
+      document.getElementById(roverCoordinates).innerText = "";
+      roverCoordinates = newPosition;
+      placeRover(roverCoordinates);
     } else {
-      const newPosition = String(Number(parts[0]) - 1) + "-" + parts[1];
-      console.log(newPosition);
+      const newPosition =
+        String(Number(parts[0]) - 1) + "-" + String(Number(parts[1]));
       document.getElementById(roverCoordinates).innerText = "";
       roverCoordinates = newPosition;
       placeRover(roverCoordinates);
     }
   } else if (direction === "ArrowDown") {
     if (Number(parts[0]) === rowNumber) {
-      console.log("sei al limite inferiore!");
+      const newPosition = 1 + "-" + parts[1];
+      document.getElementById(roverCoordinates).innerText = "";
+      roverCoordinates = newPosition;
+      placeRover(roverCoordinates);
     } else {
       const newPosition = String(Number(parts[0]) + 1) + "-" + parts[1];
-      console.log(newPosition);
       document.getElementById(roverCoordinates).innerText = "";
       roverCoordinates = newPosition;
       placeRover(roverCoordinates);
